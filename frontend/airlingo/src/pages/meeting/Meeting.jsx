@@ -93,6 +93,9 @@ function Meeting() {
     const [chatMessage, setChatMessages] = useState([]);
     const stompCilent = useRef({});
     const { VITE_CHAT_SOCKET_URL } = import.meta.env;
+    const [realTimeScripts, setRealTimeScripts] = useState([]);
+    const [prevSpeaker, setPrevSpeaker] = useState("");
+    const [prevSentence, setPrevSentence] = useState("");
 
     const OV = useRef(new OpenVidu());
     console.log(scriptData);
@@ -137,11 +140,25 @@ function Meeting() {
         // curSession.on("speechToTextMessage", (event) => {
         //     console.log(`STT ${event}`);
         //     console.log(`커넥션 아이디 : ${event.connection.connectionId}`);
-        //     if (event.reason === "recognizing") {
-        //         console.log(`User ${event.connection.connectionId} is speaking: ${event.text}`);
-        //     } else if (event.reason === "recognized") {
-        //         console.log(`User ${event.connection.connectionId} spoke: ${event.text}`);
+        //     console.log(`뭐 ? : ${event.text}`);
+        //     const user = JSON.parse(event.connection.data).clientData;
+        //     console.log(user);
+        // if (event.reason === "recognizing") {
+        //     console.log(`User ${event.connection.connectionId} is speaking: ${event.text}`);
+
+        // } else if (event.reason === "recognized") {
+        //     console.log(`User ${event.connection.connectionId} spoke: ${event.text}`);
+        // }
+        //     if (prevSpeaker !== user) {
+        //         setPrevSpeaker(JSON.parse(event.connection.data).clientData);
+        //         setRealTimeScripts((prevSentences) => [...prevSentences, prevSentence]);
+        //         setPrevSentence(event.text);
+        //         console.log(realTimeScripts);
+        //     } else {
+        //         setPrevSentence(event.text);
         //     }
+        //     console.log(prevSpeaker);
+        //     console.log(prevSentence);
         // });
 
         curSession.on("streamDestroyed", (event) => {
