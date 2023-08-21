@@ -53,6 +53,7 @@ function MeetingDictionary() {
     }, [routeTo]);
 
     const searchWord = () => {
+        if (word.length === 0) return;
         async function fetchSearchResult() {
             await getTranslateResult({
                 responseFunc: {
@@ -60,7 +61,7 @@ function MeetingDictionary() {
                         setTranslateWord(word);
                         setTranslateResult(response.data.data.toLowerCase());
                     },
-                    400: (response) => console.log(response),
+                    400: () => {},
                 },
                 data: {
                     source: translatorConfig[sourceLang.id],
@@ -76,11 +77,10 @@ function MeetingDictionary() {
     const saveWord = async () => {
         await postWord({
             responseFunc: {
-                200: (response) => {
-                    console.log(response);
+                200: () => {
                     setModalOpen(true);
                 },
-                400: (response) => console.log(response),
+                400: () => {},
             },
             data: {
                 wordName: translateResult,

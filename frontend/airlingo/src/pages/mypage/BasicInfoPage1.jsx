@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-catch */
+/* eslint-disable no-alert */
 /* eslint-disable react-hooks/exhaustive-deps */
 import styled from "@emotion/styled";
 import { useState, useRef, useEffect } from "react";
@@ -274,7 +276,7 @@ function BasicInfoPage1() {
                 routeTo,
             });
         } catch (error) {
-            console.error("Error updating user image:", error);
+            throw error;
         }
     };
 
@@ -310,7 +312,9 @@ function BasicInfoPage1() {
                 {imageModalOpen && (
                     <Modal title="프로필 이미지 편집" modalOpen={imageModalOpen} Icon={CameraIcon}>
                         <ProfileImageBox>
-                            <ProfileImage src={selectedImage || defaultProfileImage} />
+                            <ProfileImage
+                                src={selectedImage || userProfile.userImgUrl || defaultProfileImage}
+                            />
                             <CloseIconWrapper onClick={() => setImageModalOpen(false)}>
                                 <CloseIcon />
                             </CloseIconWrapper>
@@ -425,11 +429,11 @@ function BasicInfoPage1() {
                             </TitleRowBox>
                             <TitleRowBox>
                                 <TitleBox>
-                                    <TitleWrapper>누적 마일리지</TitleWrapper>
-                                    <SubTitleWrapper>TOTAL MILEAGE</SubTitleWrapper>
+                                    <TitleWrapper>마일리지</TitleWrapper>
+                                    <SubTitleWrapper>MILEAGE</SubTitleWrapper>
                                 </TitleBox>
                                 <ContentBox>
-                                    <ContentWrapper>{userProfile.userTotalMileage}</ContentWrapper>
+                                    <ContentWrapper>{userProfile.userMileage}</ContentWrapper>
                                 </ContentBox>
                             </TitleRowBox>
                         </TitleRowContainer>
@@ -686,6 +690,7 @@ const BioAreaBox = styled.div`
 const BioAreaWrapper = styled.textarea`
     border: none;
     outline: none;
+    resize: none;
     width: 330px;
     height: 70px;
     color: #000;

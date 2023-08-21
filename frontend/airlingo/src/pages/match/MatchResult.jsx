@@ -12,7 +12,6 @@ function MatchResult() {
     const { otherUser } = useSelector(selectMeeting);
     const [time, setTime] = useState(10);
     const { routeTo } = useRouter();
-    console.log(otherUser);
     useEffect(() => {
         if (time === 0) {
             routeTo("/matchstandby");
@@ -48,7 +47,7 @@ function MatchResult() {
                     <ContentLine />
                     <ContentScoreBox>
                         <ContentScoreTextBox>
-                            <ContentScoreText weight="400">매칭 점수</ContentScoreText>
+                            <ContentScoreText weight="400">평점</ContentScoreText>
                             <ContentScoreText weight="400">|</ContentScoreText>
                             <ContentScoreText weight="700">
                                 {otherUser.userRating?.toFixed(1)}
