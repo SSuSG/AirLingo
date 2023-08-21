@@ -12,7 +12,7 @@ public enum CardCode {
 	SPORTS("SPORTS", "스포츠", "Sports"),
 	HEALTH("HEALTH", "건강", "Health"),
 	FREE_TIME("FREE_TIME", "여가시간", "Free Time"),
-	RECTAL("RECTAL", "직장", "Rectal"),
+	WORK("WORK", "직장", "Work"),
 	LOVE("LOVE", "연애", "Love"),
 	MOVIE("MOVIE", "영화", "Movie");
 
